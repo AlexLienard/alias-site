@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agence Alias — Ghostwriting stratégique en cybersécurité</title>
+<meta name="description" content="Contenu technique à haute valeur crédible — cybersécurité, gouvernance, ISO 27001, NIS2, DORA, IA. Livré sous votre nom, ou celui de votre client. Partenariat white-label pour agences B2B." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --paper:        #F5F2EB;        /* near-white press paper */
+    --paper-deep:   #EEEAE0;        /* slightly cooler alt sections */
+    --paper-edge:   #E3DED1;
+    --ink:          #0F0E0B;        /* deeper press-black contrast */
+    --ink-soft:     #3D3A33;
+    --ink-faded:    #7A7466;
+    --rule:         #BAB2A0;
+    --rule-soft:    #D8D2C3;
+    --redact:       #0F0E0B;
+    --signal:       #C8221E;        /* press red — masthead vermillion */
+    --signal-soft:  rgba(200,34,30,.12);
+
+    --f-display: "Fraunces", Georgia, serif;
+    --f-sans:    "IBM Plex Sans", system-ui, sans-serif;
+    --f-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+    --maxw: 1240px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--f-sans);
+    font-weight: 400;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    /* Subtle newsprint grain */
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(0,0,0,.014) 0, transparent 38%),
+      radial-gradient(circle at 82% 78%, rgba(0,0,0,.018) 0, transparent 42%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.022 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  ::selection{ background: var(--ink); color: var(--paper); }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ───────── helpers ───────── */
+  .wrap{ width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  .mono{ font-family: var(--f-mono); font-weight: 400; letter-spacing: .04em; }
+  .upper{ text-transform: uppercase; letter-spacing: .14em; }
+  .rule{ height: 1px; background: var(--rule); border: 0; width: 100%; }
+  .hairline{ border-bottom: 1px solid var(--rule-soft); }
+
+  /* ───────── top red banner ───────── */
+  .banner-top{
+    height: 4px;
+    background: var(--signal);
+    width: 100%;
+  }
+
+  /* ───────── folio strip (newspaper-style) ───────── */
+  .folio{
+    background: var(--ink);
+    color: color-mix(in srgb, var(--paper) 78%, transparent);
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    padding: 9px 0;
+  }
+  .folio .row{
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 18px; flex-wrap: wrap;
+  }
+  .folio .left, .folio .right{ display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .folio .sep{ color: color-mix(in srgb, var(--paper) 36%, transparent); }
+  .folio strong{ color: var(--paper); font-weight: 500; }
+
+  /* ───────── nav ───────── */
+  .nav{
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px) saturate(1.05);
+    -webkit-backdrop-filter: blur(8px) saturate(1.05);
+    border-bottom: 3px double var(--ink);
+  }
+  .nav .row{
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0;
+  }
+  .brand{
+    display: flex; align-items: baseline; gap: 14px;
+  }
+  .brand .mark{
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: .02em;
+    line-height: 1;
+  }
+  .brand .tag{
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    border-left: 1px solid var(--rule);
+    padding-left: 14px;
+  }
+  .nav ul{ list-style: none; display: flex; gap: 30px; align-items: center; }
+  .nav ul a{
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    transition: color .2s;
+  }
+  .nav ul a:hover{ color: var(--ink); }
+  .nav .cta{
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 11px 18px;
+    transition: background .2s;
+  }
+  .nav .cta:hover{ background: var(--signal); }
+
+  /* ───────── hero ───────── */
+  .hero{
+    padding: 110px 0 90px;
+    position: relative;
+  }
+  .hero .meta{
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    margin-bottom: 48px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .hero .meta strong{ color: var(--ink); font-weight: 500; }
+  .hero .meta .dot{
+    width: 4px; height: 4px; background: var(--ink-faded); border-radius: 50%;
+  }
+  .hero h1{
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(56px, 9.2vw, 132px);
+    line-height: .94;
+    letter-spacing: -.025em;
+    max-width: 14ch;
+    margin-bottom: 28px;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero h1 em{
+    font-style: italic;
+    font-weight: 500;
+    color: var(--signal);
+  }
+  .hero h1 .lede{ color: var(--ink); }
+
+  .hero .sub{
+    max-width: 56ch;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-top: 32px;
+    font-weight: 300;
+  }
+  .hero .sub strong{ color: var(--ink); font-weight: 500; }
+
+  /* signed-by visual — the alias metaphor */
+  .signed{
+    margin-top: 64px;
+    display: inline-flex; align-items: baseline; gap: 16px;
+    padding: 16px 22px 18px;
+    border: 1px solid var(--rule);
+    background: var(--paper-deep);
+    position: relative;
+  }
+  .signed::before{
+    content: "Article publié · Tribune dirigeant";
+    position: absolute; top: -9px; left: 16px;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-faded);
+    background: var(--paper);
+    padding: 0 8px;
+  }
+  .signed .label{
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--ink-faded);
+    text-transform: uppercase; letter-spacing: .14em;
+  }
+  .signed .name{
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+    position: relative;
+    padding: 0 4px;
+  }
+  .signed .name .bar{
+    position: absolute;
+    inset: 6px -2px 4px -2px;
+    background: var(--redact);
+    transform: skewX(-6deg);
+  }
+  .signed .role{
+    font-family: var(--f-sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+  .signed .ghost{
+    margin-left: 18px;
+    padding-left: 18px;
+    border-left: 1px solid var(--rule);
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    align-self: center;
+  }
+
+  /* ───────── section system ───────── */
+  section{ padding: 110px 0; position: relative; }
+  .section-head{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+    align-items: baseline;
+  }
+  .section-head .num{
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--signal);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    padding-top: 8px;
+    border-top: 2px solid var(--signal);
+    font-weight: 500;
+  }
+  .section-head h2{
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(34px, 4.5vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -.018em;
+    max-width: 22ch;
+  }
+  .section-head h2 em{
+    font-style: italic;
+    font-weight: 500;
+    color: var(--signal);
+  }
+
+  /* ───────── §01 problem ───────── */
+  .problem .grid{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+  }
+  .problem .body{
+    max-width: 56ch;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .problem .body p + p{ margin-top: 1.2em; }
+  .problem .body .accent{
+    color: var(--signal);
+    font-family: var(--f-display);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .problem .tension{
+    margin-top: 56px;
+    border-top: 1px solid var(--rule);
+    padding-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .problem .tension .col{
+    padding: 0 24px;
+    border-right: 1px solid var(--rule-soft);
+  }
+  .problem .tension .col:first-child{ padding-left: 0; }
+  .problem .tension .col:last-child{ border-right: 0; padding-right: 0; }
+  .problem .tension .who{
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--ink-faded);
+    text-transform: uppercase; letter-spacing: .18em;
+    margin-bottom: 12px;
+  }
+  .problem .tension .what{
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  /* ───────── §02 scope ───────── */
+  .scope{ background: var(--paper-deep); }
+  .scope .list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .scope .item{
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    transition: padding-left .25s ease;
+    cursor: default;
+  }
+  .scope .item:nth-child(odd){ padding-right: 32px; border-right: 1px solid var(--rule); }
+  .scope .item:nth-child(even){ padding-left: 32px; }
+  .scope .item:hover{ background: rgba(0,0,0,.015); }
+  .scope .item .n{
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--ink-faded);
+    letter-spacing: .14em;
+  }
+  .scope .item .topic{
+    font-family: var(--f-display);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .scope .item .topic em{ font-style: italic; font-weight: 400; }
+  .scope .item .desc{
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ───────── §03 partners table ───────── */
+  .partners table{
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--f-sans);
+  }
+  .partners th{
+    text-align: left;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    padding: 14px 20px 14px 0;
+    border-bottom: 1px solid var(--ink);
+    vertical-align: bottom;
+  }
+  .partners td{
+    padding: 26px 20px 26px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .partners tr{ transition: background .2s; }
+  .partners tbody tr:hover{ background: rgba(0,0,0,.022); }
+  .partners td:last-child, .partners th:last-child{ padding-right: 0; }
+  .partners .type{
+    font-family: var(--f-display);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .partners .type em{ font-style: italic; font-weight: 400; }
+  .partners .gain{
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 400;
+    max-width: 38ch;
+  }
+  .partners .mode{
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    letter-spacing: .02em;
+  }
+
+  /* ───────── §04 formats ───────── */
+  .formats{ background: var(--paper-deep); }
+  .formats table{
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .formats th{
+    text-align: left;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    padding: 14px 24px 14px 0;
+    border-bottom: 1px solid var(--ink);
+  }
+  .formats td{
+    padding: 22px 24px 22px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .formats tbody tr:hover{ background: rgba(0,0,0,.022); }
+  .formats .format{
+    font-family: var(--f-display);
+    font-size: 19px;
+    font-weight: 500;
+  }
+  .formats .format em{ font-style: italic; font-weight: 400; }
+  .formats .volume{
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: .02em;
+  }
+  .formats .pos{ font-size: 14.5px; color: var(--ink); font-weight: 400; }
+
+  /* ───────── §05 engagement modes ───────── */
+  .engagement .modes{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .engagement .mode{
+    padding: 36px 32px 40px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    transition: background .25s;
+  }
+  .engagement .mode:last-child{ border-right: 0; }
+  .engagement .mode:hover{ background: rgba(0,0,0,.022); }
+  .engagement .mode:first-child{ padding-left: 0; }
+  .engagement .mode:first-child:hover{ padding-left: 8px; }
+  .engagement .mode:last-child{ padding-right: 0; }
+
+  .engagement .ref{
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--ink-faded);
+    text-transform: uppercase; letter-spacing: .18em;
+    margin-bottom: 18px;
+  }
+  .engagement .title{
+    font-family: var(--f-display);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .engagement .title em{ font-style: italic; font-weight: 400; }
+  .engagement .desc{
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-weight: 400;
+    max-width: 30ch;
+  }
+  .engagement .note{
+    margin-top: 56px;
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    letter-spacing: .03em;
+    border-left: 2px solid var(--ink);
+    padding: 6px 0 6px 18px;
+  }
+
+  /* ───────── §06 guarantees ───────── */
+  .guarantees{ background: var(--paper-deep); }
+  .guarantees ul{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .guarantees li{
+    padding: 32px 28px 32px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .guarantees li:nth-child(odd){ border-right: 1px solid var(--rule); padding-right: 32px; }
+  .guarantees li:nth-child(even){ padding-left: 32px; }
+  .guarantees li:nth-last-child(-n+2){ border-bottom: 0; }
+  .guarantees .check{
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--signal);
+    letter-spacing: .14em;
+    padding-top: 4px;
+  }
+  .guarantees .g-title{
+    font-family: var(--f-display);
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .guarantees .g-title em{ font-style: italic; font-weight: 400; }
+  .guarantees .g-desc{
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* ───────── §07 CTA ───────── */
+  .brief{
+    background: var(--ink);
+    color: var(--paper);
+    padding: 110px 0 100px;
+  }
+  .brief .section-head .num{ color: var(--signal); border-color: var(--signal); }
+  .brief .section-head h2{ color: var(--paper); }
+  .brief .body{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+  }
+  .brief .body .empty{}
+  .brief .body .col{ max-width: 56ch; }
+  .brief .body p{
+    font-size: 19px;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--paper) 86%, transparent);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+  .brief .body p strong{
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .brief .actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+    align-items: center;
+  }
+  .brief .btn{
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    padding: 16px 24px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: background .2s, transform .2s;
+  }
+  .brief .btn:hover{ background: var(--signal); color: var(--paper); }
+  .brief .btn.alt{
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent);
+  }
+  .brief .btn.alt:hover{ border-color: var(--paper); background: transparent; }
+  .brief .delay{
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: color-mix(in srgb, var(--paper) 60%, transparent);
+    margin-left: 8px;
+  }
+
+  /* ───────── footer ───────── */
+  footer{
+    background: var(--ink);
+    color: color-mix(in srgb, var(--paper) 75%, transparent);
+    border-top: 4px solid var(--signal);
+    padding: 38px 0 40px;
+  }
+  footer .row{
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+  footer .left{
+    font-family: var(--f-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--paper);
+  }
+  footer .right{
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: color-mix(in srgb, var(--paper) 55%, transparent);
+  }
+  footer .right span{ margin: 0 14px; }
+
+  /* ───────── reveal animation ───────── */
+  .reveal{ opacity: 0; transform: translateY(14px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal.in{ opacity: 1; transform: none; }
+  .stagger > *{ opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s ease; }
+  .stagger.in > *{ opacity: 1; transform: none; }
+  .stagger.in > *:nth-child(1){ transition-delay: 0ms; }
+  .stagger.in > *:nth-child(2){ transition-delay: 90ms; }
+  .stagger.in > *:nth-child(3){ transition-delay: 180ms; }
+  .stagger.in > *:nth-child(4){ transition-delay: 270ms; }
+  .stagger.in > *:nth-child(5){ transition-delay: 360ms; }
+  .stagger.in > *:nth-child(6){ transition-delay: 450ms; }
+
+  /* ───────── responsive ───────── */
+  @media (max-width: 900px){
+    .wrap{ padding: 0 22px; }
+    .folio{ font-size: 9px; }
+    .folio .right{ display: none; }
+    .folio .left .sep:last-of-type, .folio .left > *:last-child{ display: none; }
+    .nav ul{ display: none; }
+    .hero{ padding: 70px 0 56px; }
+    .hero h1{ font-size: clamp(44px, 11vw, 84px); max-width: none; }
+    .signed{ flex-wrap: wrap; gap: 10px; }
+    .signed .ghost{ border-left: 0; padding-left: 0; margin-left: 0; flex-basis: 100%; padding-top: 6px; border-top: 1px solid var(--rule); margin-top: 6px; }
+
+    section{ padding: 70px 0; }
+    .section-head{ grid-template-columns: 1fr; gap: 18px; margin-bottom: 36px; }
+    .section-head .num{ padding-top: 8px; max-width: 220px; }
+
+    .problem .grid{ grid-template-columns: 1fr; }
+    .problem .tension{ grid-template-columns: 1fr; gap: 22px; }
+    .problem .tension .col{ padding: 22px 0 0 0; border-right: 0; border-top: 1px solid var(--rule-soft); }
+    .problem .tension .col:first-child{ border-top: 0; padding-top: 0; }
+
+    .scope .list{ grid-template-columns: 1fr; }
+    .scope .item, .scope .item:nth-child(odd), .scope .item:nth-child(even){
+      padding: 22px 0; border-right: 0;
+    }
+
+    .partners table, .partners thead, .partners tbody, .partners tr, .partners td, .partners th{ display: block; width: 100%; }
+    .partners thead{ display: none; }
+    .partners tr{ border-bottom: 1px solid var(--rule); padding: 22px 0; }
+    .partners td{ padding: 4px 0; border: 0; }
+    .partners .type{ margin-bottom: 8px; }
+    .partners .mode{ margin-top: 8px; }
+
+    .formats table, .formats thead, .formats tbody, .formats tr, .formats td, .formats th{ display: block; width: 100%; }
+    .formats thead{ display: none; }
+    .formats tr{ border-bottom: 1px solid var(--rule); padding: 18px 0; }
+    .formats td{ padding: 2px 0; border: 0; }
+
+    .engagement .modes{ grid-template-columns: 1fr; }
+    .engagement .mode, .engagement .mode:first-child, .engagement .mode:last-child{
+      padding: 28px 0; border-right: 0;
+    }
+
+    .guarantees ul{ grid-template-columns: 1fr; }
+    .guarantees li, .guarantees li:nth-child(odd), .guarantees li:nth-child(even){
+      padding: 22px 0; border-right: 0;
+    }
+    .guarantees li:nth-last-child(-n+2){ border-bottom: 1px solid var(--rule); }
+    .guarantees li:last-child{ border-bottom: 0; }
+
+    .brief{ padding: 70px 0; }
+    .brief .body{ grid-template-columns: 1fr; gap: 18px; }
+    .brief .actions{ flex-direction: column; align-items: flex-start; gap: 12px; }
+    .brief .delay{ margin-left: 0; }
+
+    footer .row{ flex-direction: column; align-items: flex-start; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner-top"></div>
+
+<!-- ──────────── FOLIO ──────────── -->
+<div class="folio">
+  <div class="wrap row">
+    <div class="left">
+      <span><strong>N° 01</strong> · Vol. 2026</span>
+      <span class="sep">·</span>
+      <span>Bruxelles · Paris</span>
+      <span class="sep">·</span>
+      <span>Confidentiel</span>
+    </div>
+    <div class="right">
+      <span>Édition Agence</span>
+      <span class="sep">·</span>
+      <span>Français</span>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────── NAV ──────────── -->
+<nav class="nav">
+  <div class="wrap row">
+    <div class="brand">
+      <a href="#" class="mark">Alias</a>
+      <span class="tag">Agence · Ghostwriting cyber</span>
+    </div>
+    <ul>
+      <li><a href="#probleme">Le problème</a></li>
+      <li><a href="#perimetre">Périmètre</a></li>
+      <li><a href="#partenaires">Partenaires</a></li>
+      <li><a href="#livrables">Livrables</a></li>
+      <li><a href="#engagement">Engagement</a></li>
+    </ul>
+    <a href="#brief" class="cta">Envoyer un brief</a>
+  </div>
+</nav>
+
+<!-- ──────────── HERO ──────────── -->
+<header class="hero">
+  <div class="wrap">
+    <div class="meta reveal">
+      <span><strong>Bruxelles</strong> — Mai 2026</span>
+      <span class="dot"></span>
+      <span>Offre Agence</span>
+      <span class="dot"></span>
+      <span>Partenariat White-Label</span>
+      <span class="dot"></span>
+      <span>Confidentialité contractuelle</span>
+    </div>
+
+    <h1 class="reveal" style="transition-delay:120ms">
+      Nous écrivons.<br/><em>Vous signez.</em>
+    </h1>
+
+    <p class="sub reveal" style="transition-delay:240ms">
+      Ghostwriting stratégique en <strong>cybersécurité, gouvernance et risque</strong> — livré sous votre nom, ou celui de votre client. Aucune signature visible, aucune référence publique sans accord.
+    </p>
+
+    <div class="signed reveal" style="transition-delay:360ms">
+      <span class="label">Signé</span>
+      <span class="name">
+        <span class="bar" aria-hidden="true"></span>
+        <span style="visibility:hidden">Jean Dupuis</span>
+      </span>
+      <span class="role">CISO · Groupe coté CAC 40</span>
+      <span class="ghost">Plume · Alias</span>
+    </div>
+  </div>
+</header>
+
+<!-- ──────────── §01 PROBLÈME ──────────── -->
+<section id="probleme" class="problem">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="num">§01 · Le problème</div>
+      <h2>La cyber est un monde <em>nébuleux.</em> Le contenu généraliste n'y survit pas.</h2>
+    </div>
+
+    <div class="grid">
+      <div></div>
+      <div class="body reveal" style="transition-delay:120ms">
+        <p>
+          Vos clients opèrent dans des domaines sensibles : cyber, conformité, risque, IA réglementée. Ils ont besoin de contenu qui parle aux <strong>décideurs</strong> et aux <strong>experts</strong>. Pas l'un. Pas l'autre. Les deux.
+        </p>
+        <p>
+          Une équipe rédac généraliste ne le tient pas sur la durée. Un expert interne <span class="accent">n'écrit pas</span> — il n'a pas le temps, et souvent pas le style. Au milieu, le contenu se dilue ou devient faux.
+        </p>
+      </div>
+    </div>
+
+    <div class="tension stagger reveal">
+      <div class="col">
+        <div class="who">Les experts</div>
+        <div class="what">savent.<br/>N'écrivent pas.</div>
+      </div>
+      <div class="col">
+        <div class="who">Le marketing</div>
+        <div class="what">écrit.<br/>Ne comprend pas.</div>
+      </div>
+      <div class="col">
+        <div class="who">Les agences</div>
+        <div class="what">livrent.<br/>Bricolent le fond.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §02 PÉRIMÈTRE ──────────── -->
+<section id="perimetre" class="scope">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="num">§02 · Périmètre</div>
+      <h2>Cinq domaines. <em>Aucun débordement.</em></h2>
+    </div>
+
+    <div class="list">
+      <div class="item">
+        <div class="n">01</div>
+        <div>
+          <div class="topic">Cybersécurité <em>opérationnelle</em></div>
+          <div class="desc">SOC, SIEM, EDR, gestion de crise, retour d'expérience d'incident, threat intelligence.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="n">02</div>
+        <div>
+          <div class="topic">Gouvernance & <em>conformité</em></div>
+          <div class="desc">ISO 27001, NIS2, DORA, RGPD — lecture exigée par les comités, pas le résumé Wikipedia.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="n">03</div>
+        <div>
+          <div class="topic">Risque, audit, <em>résilience</em></div>
+          <div class="desc">Cartographies, plans de continuité, gestion tierce partie, posture face aux régulateurs.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="n">04</div>
+        <div>
+          <div class="topic">IA & sécurité <em>des SI</em></div>
+          <div class="desc">Gouvernance IA, AI Act, modèles génératifs en entreprise, vecteurs d'attaque émergents.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="n">05</div>
+        <div>
+          <div class="topic">Positionnement <em>dirigeants</em></div>
+          <div class="desc">CISO, CTO, DSI — LinkedIn, tribunes, prises de parole presse spécialisée, interventions colloques.</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="n">—</div>
+        <div>
+          <div class="topic" style="color:var(--ink-faded)">Hors périmètre</div>
+          <div class="desc">SEO. Contenu marketing classique. Rédaction généraliste. Articles publi-rédactionnels. Nous ne couvrons pas ce qui dilue le positionnement.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §03 PARTENAIRES ──────────── -->
+<section id="partenaires" class="partners">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="num">§03 · Partenaires</div>
+      <h2>Conçu pour les agences B2B qui <em>refusent</em> les sujets techniques.</h2>
+    </div>
+
+    <table class="reveal" style="transition-delay:120ms">
+      <thead>
+        <tr>
+          <th style="width:30%">Type d'agence</th>
+          <th style="width:42%">Ce que vous y gagnez</th>
+          <th style="width:28%">Mode de travail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="type">Agence <em>content / ghostwriting</em></td>
+          <td class="gain">Couvrir les sujets techniques refusés en interne, sans recruter de profil cyber dédié.</td>
+          <td class="mode">Brief → livraison<br/>Sous 5–7 jours</td>
+        </tr>
+        <tr>
+          <td class="type">Agence <em>branding B2B tech</em></td>
+          <td class="gain">Renforcer l'autorité du client sur le fond — pas seulement la forme.</td>
+          <td class="mode">Collaboration régulière<br/>Volume</td>
+        </tr>
+        <tr>
+          <td class="type">Agence <em>SaaS / tech marketing</em></td>
+          <td class="gain">Produire du contenu crédible pour un ICP technique exigeant (CTO, DevOps, sécurité).</td>
+          <td class="mode">Mission ponctuelle<br/>ou récurrente</td>
+        </tr>
+        <tr>
+          <td class="type">Cabinet <em>conseil / PR B2B</em></td>
+          <td class="gain">Préparer la prise de parole dirigeant sur sujets sensibles, sans risque de dérapage.</td>
+          <td class="mode">Tribune ghostée<br/>Interview rédigée</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ──────────── §04 LIVRABLES ──────────── -->
+<section id="livrables" class="formats">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="num">§04 · Livrables</div>
+      <h2>Six formats. Chacun avec une <em>fonction</em> commerciale précise.</h2>
+    </div>
+
+    <table class="reveal" style="transition-delay:120ms">
+      <thead>
+        <tr>
+          <th style="width:32%">Format</th>
+          <th style="width:32%">Volume type</th>
+          <th style="width:36%">Positionnement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="format">Article <em>de fond</em></td>
+          <td class="volume">1 200 – 2 500 mots</td>
+          <td class="pos">Autorité sectorielle · référencement durable</td>
+        </tr>
+        <tr>
+          <td class="format">Tribune <em>dirigeant</em></td>
+          <td class="volume">800 – 1 200 mots</td>
+          <td class="pos">LinkedIn · presse spécialisée</td>
+        </tr>
+        <tr>
+          <td class="format">Livre <em>blanc</em></td>
+          <td class="volume">6 000 – 12 000 mots</td>
+          <td class="pos">Lead generation B2B · contenu d'ancrage</td>
+        </tr>
+        <tr>
+          <td class="format">Newsletter <em>experte</em></td>
+          <td class="volume">600 – 900 mots · mensuel</td>
+          <td class="pos">Fidélisation audience qualifiée</td>
+        </tr>
+        <tr>
+          <td class="format">Thread <em>LinkedIn</em></td>
+          <td class="volume">8 – 12 posts structurés</td>
+          <td class="pos">Visibilité CISO · CTO · DSI</td>
+        </tr>
+        <tr>
+          <td class="format">Étude <em>de cas</em></td>
+          <td class="volume">1 500 – 2 500 mots</td>
+          <td class="pos">Preuve commerciale · cycle de vente</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ──────────── §05 ENGAGEMENT ──────────── -->
+<section id="engagement" class="engagement">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="num">§05 · Engagement</div>
+      <h2>Trois modes de collaboration. <em>Choisis selon le besoin réel.</em></h2>
+    </div>
+
+    <div class="modes stagger reveal">
+      <div class="mode">
+        <div class="ref">Mode A · 01</div>
+        <div class="title">Mission <em>ponctuelle</em></div>
+        <div class="desc">Brief unique, livraison fixe, tarif à la pièce. Pour tester la collaboration sans engagement.</div>
+      </div>
+      <div class="mode">
+        <div class="ref">Mode B · 02</div>
+        <div class="title">Forfait <em>mensuel</em></div>
+        <div class="desc">Volume convenu, livrables réguliers, priorité planning. Pour les agences avec besoin récurrent.</div>
+      </div>
+      <div class="mode">
+        <div class="ref">Mode C · 03</div>
+        <div class="title">Partenariat <em>agence</em></div>
+        <div class="desc">Tarif dégressif, accord de confidentialité, disponibilité dédiée. Pour structurer un canal stable.</div>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      Tarifs communiqués sur demande. Un brief = un devis sous 24h. Aucun forfait public — nous tarifons à la complexité réelle du sujet, pas au volume.
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §06 GARANTIES ──────────── -->
+<section class="guarantees">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="num">§06 · Engagements</div>
+      <h2>Ce que vous pouvez <em>garantir</em> à votre client.</h2>
+    </div>
+
+    <ul class="stagger reveal">
+      <li>
+        <span class="check">[ 01 ]</span>
+        <div>
+          <div class="g-title">Vérifié sur <em>le fond</em></div>
+          <div class="g-desc">Sources primaires, textes réglementaires, retours d'expérience documentés. Aucune régurgitation générique.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">[ 02 ]</span>
+        <div>
+          <div class="g-title">Aucune <em>IA non supervisée</em></div>
+          <div class="g-desc">Relecture experte systématique. Le contenu passe entre des mains qui comprennent le sujet.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">[ 03 ]</span>
+        <div>
+          <div class="g-title">Délais <em>tenus</em></div>
+          <div class="g-desc">Engagement contractuel sur les livrables. Le planning est un livrable comme un autre.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">[ 04 ]</span>
+        <div>
+          <div class="g-title">Confidentialité <em>totale</em></div>
+          <div class="g-desc">NDA disponible. Aucune référence publique, aucune mention dans un portfolio sans accord écrit.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">[ 05 ]</span>
+        <div>
+          <div class="g-title">Un seul <em>interlocuteur</em></div>
+          <div class="g-desc">Pas de rotation d'équipe, pas de chaîne de transmission. Une personne, du brief à la livraison.</div>
+        </div>
+      </li>
+      <li>
+        <span class="check">[ 06 ]</span>
+        <div>
+          <div class="g-title">Refus <em>assumé</em></div>
+          <div class="g-desc">Nous déclinons les sujets que nous ne maîtrisons pas. Mieux vaut un non honnête qu'un livrable médiocre.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ──────────── §07 BRIEF ──────────── -->
+<section id="brief" class="brief">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="num">§07 · Brief</div>
+      <h2>Envoyez une <em>problématique.</em> Nous revenons sous 24h.</h2>
+    </div>
+
+    <div class="body">
+      <div class="empty"></div>
+      <div class="col">
+        <p class="reveal">
+          Un brief client, une tribune à rédiger, un livre blanc à structurer, un dirigeant à positionner sur un sujet sensible. <strong>Décrivez le besoin réel.</strong> Nous revenons avec une approche, un format, un tarif.
+        </p>
+
+        <div class="actions reveal" style="transition-delay:120ms">
+          <a href="mailto:ghost@skuld-intelligence.com?subject=Brief%20agence%20%C2%B7%20Ghostwriting%20cyber" class="btn">
+            <span>ghost@skuld-intelligence.com</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="mailto:ghost@skuld-intelligence.com?subject=Partenariat%20white-label" class="btn alt">
+            Partenariat white-label
+          </a>
+          <span class="delay">Réponse sous 24h ouvrées</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer>
+  <div class="wrap row">
+    <div class="left">Alias <span class="mono" style="font-size:11px; color:color-mix(in srgb, var(--paper) 45%, transparent); margin-left:10px; letter-spacing:.18em;">— GHOSTWRITING STRATÉGIQUE</span></div>
+    <div class="right">
+      © 2026 Agence Alias <span>·</span> Skuld Intelligence <span>·</span> Confidentialité contractuelle
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll — sober, no flash
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '-8% 0px -8% 0px', threshold: 0.05 });
+
+  document.querySelectorAll('.reveal, .stagger').forEach(el => io.observe(el));
+
+  // Trigger hero reveal immediately
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('in'));
+  });
+</script>
+
+</body>
+</html>
